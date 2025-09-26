@@ -1,0 +1,415 @@
+
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "RH API Documentation",
+        "description": "User Management API - Initial module of a broader HR system. Currently provides basic CRUD operations for user entities (create, read, update, delete). Note: This is an incomplete version focusing only on user management; future releases will expand to full HR functionality including departments, roles, and payroll features.",
+        "contact": {
+            "github": "https://github.com/lal28"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "Local Server"
+        }
+    ],
+    "paths": {
+        "/api/v1/users": {
+            "get": {
+                "summary": "Get all users",
+                "description": "Retrieve a list of all users in the system",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "count": {
+                                            "type": "integer",
+                                            "example": 5
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/User"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create a new user",
+                "description": "Add a new user to the system",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/{id}": {
+            "get": {
+                "summary": "Get user by ID",
+                "description": "Retrieve a specific user by their ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the user to retrieve",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update user",
+                "description": "Update an existing user's information",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the user to update",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserInput"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete user",
+                "description": "Remove a user from the system",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID of the user to delete",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Usuário removido com sucesso"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+      "schemas": {
+        "User": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 1,
+              "readOnly": true
+            },
+            "nome": {
+              "type": "string",
+              "example": "Lucas Araujo"
+            },
+            "dataNascimento": {
+              "type": "string",
+              "format": "date",
+              "example": "1995-05-10"
+            },
+            "telefone": {
+              "type": "string",
+              "example": "(92) 99999-8888"
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "example": "lucas@email.com"
+            },
+            "estadoCivil": {
+              "type": "string",
+              "enum": ["solteiro", "casado", "divorciado", "viúvo"],
+              "example": "solteiro"
+            },
+            "sexo": {
+              "type": "string",
+              "enum": ["masculino", "feminino", "outro"],
+              "example": "masculino"
+            },
+            "cep": {
+              "type": "string",
+              "example": "69000-000"
+            },
+            "endereco": {
+              "type": "string",
+              "example": "Rua Exemplo, 123"
+            },
+            "bairro": {
+              "type": "string",
+              "example": "Centro"
+            },
+            "cidade": {
+              "type": "string",
+              "example": "Manaus"
+            },
+            "estado": {
+              "type": "string",
+              "example": "AM"
+            },
+            "pais": {
+              "type": "string",
+              "example": "Brasil"
+            },
+            "usuario": {
+              "type": "string",
+              "example": "lucasaraujo"
+            },
+            "departamento": {
+              "type": "string",
+              "example": "TI"
+            },
+            "emailCorp": {
+              "type": "string",
+              "format": "email",
+              "example": "lucas.araujo@empresa.com"
+            },
+            "ativo": {
+              "type": "string",
+              "enum": ["sim", "não"],
+              "example": "sim"
+            },
+            "dataAdmissao": {
+              "type": "string",
+              "format": "date",
+              "example": "2023-01-15"
+            },
+            "numeroIdentidade": {
+              "type": "string",
+              "example": "12345678"
+            },
+            "numeroCpf": {
+              "type": "string",
+              "example": "11122233344"
+            }
+          }
+        },
+        "UserInput": {
+          "type": "object",
+          "required": ["nome", "email", "usuario", "departamento"],
+          "properties": {
+            "nome": {
+              "type": "string",
+              "example": "Lucas Araujo"
+            },
+            "dataNascimento": {
+              "type": "string",
+              "format": "date",
+              "example": "1995-05-10"
+            },
+            "telefone": {
+              "type": "string",
+              "example": "(92) 99999-8888"
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "example": "lucas@email.com"
+            },
+            "estadoCivil": {
+              "type": "string",
+              "enum": ["solteiro", "casado", "divorciado", "viúvo"],
+              "example": "solteiro"
+            },
+            "sexo": {
+              "type": "string",
+              "enum": ["masculino", "feminino", "outro"],
+              "example": "masculino"
+            },
+            "cep": {
+              "type": "string",
+              "example": "69000-000"
+            },
+            "endereco": {
+              "type": "string",
+              "example": "Rua Exemplo, 123"
+            },
+            "bairro": {
+              "type": "string",
+              "example": "Centro"
+            },
+            "cidade": {
+              "type": "string",
+              "example": "Manaus"
+            },
+            "estado": {
+              "type": "string",
+              "example": "AM"
+            },
+            "pais": {
+              "type": "string",
+              "example": "Brasil"
+            },
+            "usuario": {
+              "type": "string",
+              "example": "lucasaraujo"
+            },
+            "departamento": {
+              "type": "string",
+              "example": "TI"
+            },
+            "emailCorp": {
+              "type": "string",
+              "format": "email",
+              "example": "lucas.araujo@empresa.com"
+            },
+            "ativo": {
+              "type": "string",
+              "enum": ["sim", "não"],
+              "example": "sim"
+            },
+            "dataAdmissao": {
+              "type": "string",
+              "format": "date",
+              "example": "2023-01-15"
+            },
+            "numeroIdentidade": {
+              "type": "string",
+              "example": "12345678"
+            },
+            "numeroCpf": {
+              "type": "string",
+              "example": "11122233344"
+            }
+          }
+        },
+        "UserList": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer",
+              "example": 5
+            },
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "Error": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "string",
+              "example": "Usuário não encontrado"
+            }
+          }
+        }
+      }
+    }
+}
