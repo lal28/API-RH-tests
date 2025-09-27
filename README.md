@@ -57,6 +57,29 @@ npm start
 
 A API ficará disponível em `http://localhost:3000`
 
+### Resultado Esperado
+```
+Tests: 36 passed, 36 total
+Time: ~10-15 segundos
+```
+
+## 🎯 Testes Implementados
+
+| Técnica | Endpoint | Valida | Resultado Esperado |
+|---------|----------|--------|-------------------|
+| **Particionamento** | `POST /users` | Dados válidos/inválidos | ✅ 201 / ❌ 400 |
+| **Valor Limite** | `GET /users/:id` | IDs extremos | ✅ 200 / ❌ 404 |
+| **Caixa-Preta** | `PUT /users/:id` | Atualização | ✅ Preserva campos |
+| **End-to-End** | Todos | Fluxo CRUD | ✅ Integração completa |
+| **Verificação** | `DELETE /users/:id` | Deleção precisa | ✅ Remove apenas correto |
+
+## 🔍 Interpretando Resultados
+
+```bash
+✓ teste passou (15 ms)    # Sucesso
+✗ teste falhou           # Falha - verificar mensagem
+```
+
 ## 📁 Estrutura do Projeto
 
 ```
