@@ -11,7 +11,7 @@ app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/docs", swaggerRoute);
 
 // Só iniciar servidor se NÃO estiver em ambiente de teste
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== "test") {
   app.listen(3000, () => {
     console.log("API rodando em http://localhost:3000");
     console.log(`Docs: http://localhost:3000/api/v1/docs`);
