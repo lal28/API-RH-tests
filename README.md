@@ -1,194 +1,126 @@
-# 👥 API RH - Sistema de Gerenciamento de Funcionários
+# API-RH-tests 🧪
 
-Uma API REST simples para gerenciar funcionários de uma empresa, construída com Node.js e Express.
+## 📋 Descrição
 
-## 📋 Funcionalidades
+Este projeto implementa uma suíte completa de **testes automatizados** para a [API-RH](https://github.com/lal28/API-RH), uma API que gerencia operações CRUD (Create, Read, Update, Delete) de usuários/funcionários.
 
-- ✅ **CRUD completo** de funcionários
-- ✅ Listar todos os funcionários
-- ✅ Buscar funcionário por ID
-- ✅ Criar novo funcionário
-- ✅ Atualizar dados do funcionário
-- ✅ Remover funcionário
-- ✅ Dados de exemplo já inclusos
+Os testes foram desenvolvidos aplicando diferentes técnicas de **análise funcional** e **caixa-preta**, garantindo a qualidade e confiabilidade da API através de:
 
-## 🚀 Como executar
+- **Testes de Particionamento de Equivalência** (CREATE)
+- **Testes de Análise de Valor Limite** (READ)  
+- **Testes de Caixa-Preta** (UPDATE)
+- **Testes End-to-End** (Fluxo completo CRUD)
+- **Testes de Verificação vs Validação** (DELETE)
 
-### 1. Clone o repositório
+## 🚀 Como Executar
+
+### Pré-requisitos
+- **Node.js** (versão 14 ou superior)
+- **npm** ou **yarn**
+- **Git**
+
+### Passo a passo
+
+1. **Clone o repositório:**
 ```bash
-git clone https://github.com/seu-usuario/api-rh.git
-cd api-rh
+git clone https://github.com/seu-usuario/API-RH-tests.git
+cd API-RH-tests
 ```
 
-### 2. Instale as dependências
+2. **Instale as dependências:**
 ```bash
 npm install
 ```
 
-### 3. Execute o servidor
+3. **Execute os testes:**
+```bash
+# Executar todos os testes
+npm test
+
+# Executar testes em modo watch (desenvolvimento)
+npm run test:watch
+
+# Executar testes com cobertura de código
+npm run test:coverage
+
+# Verificar qualidade do código
+npm run code:check
+
+# Corrigir problemas de formatação automaticamente
+npm run code:fix
+```
+
+4. **Iniciar a API (se necessário):**
 ```bash
 npm start
 ```
 
-### 4. Acesse a API
-O servidor estará rodando em: `http://localhost:3000`
+A API ficará disponível em `http://localhost:3000`
 
-## 📖 Endpoints da API
-
-### Base URL: `http://localhost:3000/api/v1/users`
-
-| Método | Endpoint | Descrição |
-|--------|----------|-----------|
-| `GET` | `/api/v1/docs` | Documentação Swagger |
-| `GET` | `/api/v1/users` | Lista todos os funcionários |
-| `GET` | `/api/v1/users/:id` | Busca funcionário por ID |
-| `POST` | `/api/v1/users` | Cria novo funcionário |
-| `PUT` | `/api/v1/users/:id` | Atualiza funcionário existente |
-| `DELETE` | `/api/v1/users/:id` | Remove funcionário |
-
-## 📝 Exemplo de dados
-
-```json
-{
-  "nome": "Lucas Araujo",
-  "dataNascimento": "1995-05-10",
-  "telefone": "(92) 99999-8888",
-  "email": "lucas@email.com",
-  "estadoCivil": "solteiro",
-  "sexo": "masculino",
-  "cep": "69000-000",
-  "endereco": "Rua Exemplo, 123",
-  "bairro": "Centro",
-  "cidade": "Manaus",
-  "estado": "AM",
-  "pais": "Brasil",
-  "usuario": "lucasaraujo",
-  "departamento": "TI",
-  "emailCorp": "lucas.araujo@empresa.com",
-  "ativo": "sim",
-  "dataAdmissao": "2023-01-15",
-  "numeroIdentidade": "12345678",
-  "numeroCpf": "11122233344"
-}
-```
-
-## 🧪 Testando a API
-
-### 1. No navegador (GET)
-```
-http://localhost:3000/api/v1/users
-```
-
-### 2. Com cURL
-```bash
-# Listar todos
-curl http://localhost:3000/api/v1/users
-
-# Buscar por ID
-curl http://localhost:3000/api/v1/users/1
-
-# Criar novo funcionário
-curl -X POST http://localhost:3000/api/v1/users \
-  -H "Content-Type: application/json" \
-  -d '{"nome":"João Silva","email":"joao@email.com"}'
-
-# Atualizar funcionário
-curl -X PUT http://localhost:3000/api/v1/users/1 \
-  -H "Content-Type: application/json" \
-  -d '{"telefone":"(11) 99999-0000"}'
-
-# Deletar funcionário
-curl -X DELETE http://localhost:3000/api/v1/users/1
-```
-
-### 3. Com Postman/Insomnia
-Importe as requisições usando os exemplos de cURL acima ou configure manualmente.
-
-## 📁 Estrutura do projeto
+## 📁 Estrutura do Projeto
 
 ```
-api-rh/
-├── package.json            # Dependências e scripts
-├── index.js                # Servidor principal
-├── data.js                 # Dados em memória
-└── routes/
-    └── users.js            # Rotas CRUD dos usuários
-    └── swagger.route.js    # Rotas documentação
+API-RH-tests/
+├── .prettierignore            # Arquivos ignorados pelo Prettier
+├── .prettierrc                # Configuração do Prettier
+├── eslint.config.js           # Configuração do ESLint
+├── package-lock.json          # Lock das versões das dependências
+├── package.json               # Dependências e scripts do projeto
+├── README.md                  # Documentação do projeto
+└── src/
+    ├── data.js                # Dados mockados para desenvolvimento
+    ├── helpers/
+    │   └── testSetup.js       # Utilitários e dados fictícios para testes
+    ├── index.js               # Configuração principal da aplicação Express
+    ├── routes/
+    │   ├── swagger.route.js   # Rotas para documentação Swagger
+    │   └── users.js           # Rotas CRUD com validações implementadas
+    ├── swagger.json           # Especificação da API em formato OpenAPI
+    └── __tests__/
+        └── users.test.js      # Suíte completa de testes automatizados
 ```
 
-# 📖 Documentação da API com Swagger
 
-## 🌐 Acessando a Documentação
+## 🛠️ Tecnologias Utilizadas
 
-Após iniciar o servidor, acesse a documentação interativa em:
-```
-http://localhost:3000/api/v1/docs
-```
+### **Framework de Testes**
+- **Jest** - Framework de testes JavaScript
+- **Supertest** - Testes de integração HTTP
+- **@faker-js/faker** - Geração de dados fictícios
 
-## 🚀 Como Usar a Documentação
+### **Qualidade de Código**
+- **ESLint** - Análise estática de código
+- **Prettier** - Formatação automática de código
 
-### 1. **Explorar Endpoints**
-- Expandir cada seção para ver os endpoints disponíveis
-- Visualizar métodos HTTP (GET, POST, PUT, DELETE)
-- Ver descrições detalhadas de cada operação
-
-### 2. **Testar Endpoints Diretamente**
-- Clicar em "Try it out" em qualquer endpoint
-- Preencher os parâmetros necessários
-- Clicar em "Execute" para enviar a requisição
-- Ver a resposta em tempo real com código de status e corpo
-
-### 3. **Exemplos de Uso**
-- Todos os campos incluem exemplos predefinidos
-- Modelos de requisição prontos para teste
-- Respostas de sucesso e erro documentadas
-
-### 4. **Esquemas de Dados**
-- Seção "Schemas" mostra a estrutura completa dos usuários
-- Detalhes de todos os campos e seus formatos
-- Valores obrigatórios versus opcionais
-
-
-## 🔍 Dica
-
-A documentação é **interativa** - você pode testar todas as operações diretamente pela interface do Swagger sem necessidade de ferramentas externas como Postman ou Insomnia.
-
-
-
-*Documentação gerada automaticamente com Swagger/OpenAPI 3.0*
-
-## ⚠️ Observações importantes
-
-- **Dados temporários**: Os dados ficam apenas na memória. Ao reiniciar o servidor, todas as alterações são perdidas
-
-
-## 🛠️ Tecnologias utilizadas
-
+### **Backend**
 - **Node.js** - Runtime JavaScript
 - **Express.js** - Framework web
-- **Body-Parser** - Middleware para parsing JSON
-- **Swagger UI** - API Documentation
-- **Swagger exprees** - API Documentation
+- **ES Modules** - Sistema de módulos moderno
 
-## 🌍 Possíveis usos da nossa API
 
-O objetivo inicial desta API é servir como **backend para o  [nosso sistema de RH](https://github.com/Pedro9185/Sprint-2-Projeto-Integrado-III)**, fornecendo as funcionalidades essenciais para cadastrar, consultar, atualizar e remover informações de funcionários.  
 
-Porém, como se trata de um **CRUD de usuários**, ela pode ser facilmente aproveitada em outros cenários, como por exemplo:
 
-- **Pequenas empresas**: substituir planilhas manuais, centralizando o cadastro de funcionários de forma mais organizada.  
-- **Startups**: integrar com sistemas de folha de pagamento, controle de ponto ou plataformas internas.  
-- **Departamentos de TI**: ser usada em treinamentos de integração entre front-end e back-end.  
-- **Soluções personalizadas**: permitir consultas rápidas sobre usuários (contato, departamento, status) em diferentes dispositivos.  
+## 🔧 Scripts Disponíveis
 
-Assim, mesmo começando como um projeto acadêmico, a API já demonstra como dados simples podem ganhar utilidade prática em diversos contextos do mundo real.
+```bash
+npm test                    # Executar todos os testes
+npm run test:watch          # Testes em modo watch
+npm run test:coverage       # Testes com relatório de cobertura
+npm run lint                # Verificar problemas de código
+npm run lint:fix            # Corrigir problemas automaticamente  
+npm run format              # Formatar código com Prettier
+npm run code:check          # Verificação completa (lint + format)
+npm run code:fix            # Correção completa (lint + format)
+npm start                   # Iniciar servidor de desenvolvimento
+```
 
-## Desenvolvedores
+## 👥 Desenvolvedores
+
 [Lucas Araujo](https://github.com/lal28)<br>
 [Pedro Henrique](https://github.com/Pedro9185)<br>
 [Jaine Bento](https://github.com/jaibento)<br>
 
+## 📝 Licença
 
-## 📄 Licença
+Este projeto foi desenvolvido para fins educacionais como parte do curso de **Análise e Desenvolvimento de Sistemas**.
 
-Este projeto está sob a licença ISC
