@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-// Configurar Faker para português brasileiro
+//
 faker.locale = "pt_BR";
 
 // Função para gerar dados de usuário fictícios

@@ -137,6 +137,15 @@ npm run code:fix            # Correção completa (lint + format)
 npm start                   # Iniciar servidor de desenvolvimento
 ```
 
+## 🌍 Componente Extensionista
+
+
+Os testes de software desempenham um papel fundamental na melhoria da qualidade dos sistemas que utilizamos no dia a dia. Quando realizamos testes para garantir que apenas usuários autorizados tenham acesso às informações de funcionários, estamos protegendo dados sensíveis, como salários, endereços, CPFs e históricos profissionais. Na prática, isso evita que alguém tenha sua privacidade comprometida ou seus dados utilizados de maneira inadequada. Assim, os testes oferecem segurança aos usuários, impedindo que informações confidenciais sejam expostas. 
+
+Além disso, os testes de CRUD (criar, ler, atualizar, deletar) asseguram que operações críticas, como admissões, demissões e alterações salariais, sejam processadas corretamente. Isso evita situações graves, como um funcionário deixar de receber seu salário por falhas no cadastro. Já os testes de valor limite (como verificação de IDs inválidos ou formatos de e-mail) contribuem para que o sistema seja mais tolerante a erros. Dessa forma, usuários com diferentes níveis de familiaridade tecnológica não são prejudicados por pequenos equívocos de digitação, o que reduz frustrações e garante inclusão. Outro ponto essencial é a economia: ao aplicar testes de forma estruturada desde o início do desenvolvimento, reduzimos custos a longo prazo. Isso acontece porque falhas são identificadas e corrigidas mais cedo, evitando retrabalho, problemas na produção e gastos extras com suporte. Além disso, quanto maior o nível de automação dos testes, menor o tempo e o esforço necessários para validar novas funcionalidades.
+
+
+
 ## 👥 Desenvolvedores
 
 [Lucas Araujo](https://github.com/lal28)<br>
